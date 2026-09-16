@@ -15,47 +15,65 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+  const subtitleRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || !heroRef.current) return;
 
-    gsap.from(iconRef.current, {
-      opacity: 0,
-      scale: 0.5,
-      duration: 1.2,
-      ease: "power3.out",
-      delay: 0.2,
-    });
+    const ctx = gsap.context(() => {
+      gsap.from(iconRef.current, {
+        opacity: 0,
+        scale: 0.3,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.3,
+      });
 
-    gsap.from(titleRef.current, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.5,
-    });
+      gsap.from(titleRef.current, {
+        opacity: 0,
+        y: 80,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.6,
+      });
 
-    gsap.from(textRef.current, {
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.8,
-    });
+      gsap.from(subtitleRef.current, {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.9,
+      });
 
-    gsap.from("section", {
-      opacity: 0,
-      y: 60,
-      duration: 0.8,
-      ease: "power2.out",
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: "body",
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse",
-      },
+      gsap.from(ctaRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 1.2,
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const sections = document.querySelectorAll(".reveal-section");
+    sections.forEach((section) => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
     });
   }, []);
 
@@ -63,91 +81,94 @@ export default function Home() {
     <main>
       <ProgressBar />
 
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden">
-        <div className="absolute inset-0">
+      {/* Hero */}
+      <section ref={heroRef} className="hero-section">
+        <div className="hero-bg">
           <img
-            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=75&fit=crop"
-            alt="Isla Apipe — Rio Parana"
+            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=80&fit=crop"
+            alt="Isla Apipe"
             className="w-full h-full object-cover"
-            style={{ objectFit: "cover" }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-tierra-900/70 via-tierra-900/40 to-tierra-900/90" />
-
-        <div className="relative h-full flex flex-col items-center justify-center px-6 text-center">
-          <div ref={iconRef} className="mb-6">
+        <div className="hero-overlay" />
+        <div className="hero-content">
+          <div ref={iconRef} className="hero-icon">
             <img
               src="/images/icono-APINS.png"
-              alt="Icono Isla Apipe"
-              className="w-20 h-20 mx-auto"
-              style={{ filter: "drop-shadow(0 0 20px rgba(96,179,96,0.5))" }}
+              alt="Isla Apipe"
+              className="w-24 h-24"
             />
           </div>
-          <h1 ref={titleRef} className="font-display text-5xl md:text-8xl text-tierra-50 mb-4">
+          <h1 ref={titleRef} className="hero-title">
             Isla Apipe
           </h1>
-          <p ref={textRef} className="text-lg md:text-xl text-tierra-200 max-w-xl mb-8">
+          <p ref={subtitleRef} className="hero-subtitle">
+            Corrientes, Argentina
+          </p>
+          <p className="hero-description">
             27,710 hectareas de biodiversidad sobre el Rio Parana
           </p>
           <a
-            href="#scroll-sections"
-            className="px-8 py-3 bg-verde-600 text-tierra-50 rounded-full hover:bg-verde-500 transition-all duration-300 text-lg glass"
+            ref={ctaRef}
+            href="#secciones"
+            className="hero-cta"
           >
-            Explorar
+            Descubrir
           </a>
         </div>
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-indicator">
-          <div className="w-6 h-10 border-2 border-tierra-300 rounded-full flex items-start justify-center p-2">
-            <div className="w-1.5 h-3 bg-tierra-300 rounded-full" />
-          </div>
+        <div className="scroll-indicator">
+          <div className="scroll-line" />
         </div>
       </section>
 
-      {/* Glassmorphism Info Section */}
-      <section className="section-padding bg-tierra-900 text-tierra-50">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl mb-8 text-center">
-            Conocé la isla
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-card p-6 rounded-2xl">
-              <h3 className="text-verde-400 text-xl font-bold mb-3">🧭 Geografia</h3>
-              <p className="text-tierra-200">
-                27,710 hectareas rodeadas por el Rio Parana. Ubicada en la Provincia de Corrientes, 
-                entre la Reserva Natural y la Represa Yacyreta.
-              </p>
+      {/* About Section */}
+      <section id="sobre" className="reveal-section about-section">
+        <div className="max-w-lg mx-auto px-6 text-center">
+          <span className="section-tag">Conocenos</span>
+          <h2 className="about-title">Un rincon del Parana</h2>
+          <p className="about-text">
+            Isla Apipé Grande es una reserva natural de 27,710 hectareas en la 
+            Provincia de Corrientes, Argentina. Rodeada por el Rio Parana, 
+            entre la Represa Yacyreta y la ciudad de Ituzaingo.
+          </p>
+          <div className="about-stats">
+            <div className="stat">
+              <span className="stat-number">27,710</span>
+              <span className="stat-label">Hectareas</span>
             </div>
-            <div className="glass-card p-6 rounded-2xl">
-              <h3 className="text-rio-400 text-xl font-bold mb-3">📜 Historia</h3>
-              <p className="text-tierra-200">
-                Capital Provincial de Bienes Intangibles desde 2018. Tradiciones orales, chamame, 
-                y una cultura islenha que resiste el tiempo.
-              </p>
+            <div className="stat">
+              <span className="stat-number">1994</span>
+              <span className="stat-label">Reserva desde</span>
             </div>
-            <div className="glass-card p-6 rounded-2xl">
-              <h3 className="text-arena-400 text-xl font-bold mb-3">🌿 Naturaleza</h3>
-              <p className="text-tierra-200">
-                Flora y fauna del litoral argentino. Aves, palmerales, senderos y aguas cristalinas 
-                esperan al visitante.
-              </p>
-            </div>
-            <div className="glass-card p-6 rounded-2xl">
-              <h3 className="text-tierra-300 text-xl font-bold mb-3">🎭 Cultura</h3>
-              <p className="text-tierra-200">
-                Artesanias, cabalgatas, gastronomia local y la calidez de su gente. 
-                Un rincón del Parana que invita a quedarse.
-              </p>
+            <div className="stat">
+              <span className="stat-number">2018</span>
+              <span className="stat-label">Capital Intangible</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Horizontal Scroll Sections */}
-      <div id="scroll-sections">
+      {/* Sections Cards */}
+      <section id="secciones" className="reveal-section sections-section">
+        <div className="max-w-lg mx-auto px-6 text-center mb-8">
+          <span className="section-tag">Explorar</span>
+          <h2 className="about-title">Temas principales</h2>
+        </div>
         <HorizontalScroll />
-      </div>
+      </section>
+
+      {/* Footer CTA */}
+      <section className="reveal-section cta-section">
+        <div className="max-w-lg mx-auto px-6 text-center">
+          <h2 className="cta-title">Ven a conocernos</h2>
+          <p className="cta-text">
+            Un lugar donde el tiempo se mide en atardeceres sobre el rio.
+          </p>
+          <a href="https://corrientes.tur.ar/experiencia/reserva-natural-apipe-grande/" className="cta-button" target="_blank" rel="noopener noreferrer">
+            Ver mas informacion
+          </a>
+        </div>
+      </section>
 
       <Navigation />
     </main>
