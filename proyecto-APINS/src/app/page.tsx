@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HorizontalScroll from "@/components/HorizontalScroll";
@@ -11,12 +11,19 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const heroImages = [
+  "/images/icono-APINS.png",
+  "/images/icono-APINS.ico",
+];
+
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined" || !heroRef.current) return;
@@ -58,24 +65,27 @@ export default function Home() {
     return () => ctx.revert();
   }, []);
 
+  // Cycle background images every 6 seconds
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const sections = document.querySelectorAll(".reveal-section");
-    sections.forEach((section) => {
-      gsap.from(section, {
-        opacity: 0,
-        y: 60,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
   }, []);
+
+  // Animate background image transition
+  useEffect(() => {
+    if (typeof window === "undefined" || !bgRef.current) return;
+
+    gsap.fromTo(
+      bgRef.current,
+      { opacity: 0, scale: 1.1 },
+      { opacity: 1, scale: 1, duration: 1.5, ease: "power2.inOut" }
+    );
+  }, [currentImage]);
 
   return (
     <main>
@@ -83,13 +93,7 @@ export default function Home() {
 
       {/* Hero */}
       <section ref={heroRef} className="hero-section">
-        <div className="hero-bg">
-          <img
-            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=80&fit=crop"
-            alt="Isla Apipe"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <div ref={bgRef} className="hero-bg" style={{ backgroundImage: `url(${heroImages[currentImage]})` }} />
         <div className="hero-overlay" />
         <div className="hero-content">
           <div ref={iconRef} className="hero-icon">
@@ -97,6 +101,7 @@ export default function Home() {
               src="/images/icono-APINS.png"
               alt="Isla Apipe"
               className="w-24 h-24"
+              style={{ filter: "drop-shadow(0 0 30px rgba(96,179,96,0.6))" }}
             />
           </div>
           <h1 ref={titleRef} className="hero-title">
@@ -121,7 +126,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About */}
       <section id="sobre" className="reveal-section about-section">
         <div className="max-w-lg mx-auto px-6 text-center">
           <span className="section-tag">Conocenos</span>
@@ -148,7 +153,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sections Cards */}
+      {/* Sections */}
       <section id="secciones" className="reveal-section sections-section">
         <div className="max-w-lg mx-auto px-6 text-center mb-8">
           <span className="section-tag">Explorar</span>
@@ -157,7 +162,7 @@ export default function Home() {
         <HorizontalScroll />
       </section>
 
-      {/* Footer CTA */}
+      {/* CTA */}
       <section className="reveal-section cta-section">
         <div className="max-w-lg mx-auto px-6 text-center">
           <h2 className="cta-title">Ven a conocernos</h2>
