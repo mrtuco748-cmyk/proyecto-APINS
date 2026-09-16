@@ -10,7 +10,7 @@ interface SectionRevealProps {
 
 export default function SectionReveal({ id, label, children }: SectionRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = use(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
