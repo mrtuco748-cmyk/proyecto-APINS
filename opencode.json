@@ -1,0 +1,85 @@
+{
+  "projectMetadata": {
+    "name": "APINS",
+    "description": "Proyecto web para mostrar datos interesantes de Isla Apipe Grande, Corrientes, Argentina",
+    "type": "web-app",
+    "createdAt": "2026-09-16",
+    "version": "0.0.1"
+  },
+
+  "discoveryAnswers": {
+    "bloque1": {
+      "projectType": "web-app",
+      "mainObjective": "Página web para mostrar datos interesantes de Isla Apipe Grande, Corrientes, Argentina",
+      "targetAudience": "Usuarios finales",
+      "valueProposition": "Portafolio/Proyecto personal sobre la isla natal"
+    },
+    "bloque2": {
+      "teamSize": "solo",
+      "estimatedLOC": "20-50k",
+      "environment": "en-desarrollo",
+      "documentationLevel": "minimal",
+      "testingLevel": "high"
+    },
+    "bloque3": {
+      "languages": ["Python", "TypeScript"],
+      "frameworks": ["Next.js/Nuxt"],
+      "database": "ninguna",
+      "infrastructure": "vercel",
+      "externalDependencies": "no"
+    },
+    "bloque4": {
+      "workStyle": "consultivo",
+      "changeSpeed": "rapido",
+      "namingRules": "camelCase para variables/funciones, PascalCase para clases, kebab-case para archivos",
+      "nonNegotiables": ["No usar emojis", "Conventional Commits", "TypeScript strict mode"],
+      "mandatoryTools": []
+    },
+    "bloque5": {
+      "domainConcepts": ["Isla Apipe", "Datos geograficos", "Turismo", "Gastronomia", "Historia y cultura"],
+      "regulations": ["sin definir"],
+      "criticalUserFlows": ["Ver datos de la isla", "Explorar secciones"],
+      "fragileAreas": ["ninguna conocida"]
+    },
+    "bloque6": {
+      "projectStatus": "new",
+      "currentState": "Day 1, solo setup",
+      "historicalDecisions": [],
+      "painPoints": ["ninguno"]
+    }
+  },
+
+  "agentConfig": {
+    "version": "2.0",
+    "contextPath": "docs/contexto",
+    "contextFiles": [
+      "forma-de-trabajo-con-el-usuario.md",
+      "glosario.md",
+      "arquitectura.md",
+      "convenciones.md",
+      "decisiones.md",
+      "flujo-de-trabajo.md",
+      "errores-conocidos.md",
+      "historial.md"
+    ],
+    "validateBeforeEachAction": true,
+    "autoDocumentChanges": true,
+    "requiredApprovals": true,
+    "validationLevel": "strict"
+  },
+
+  "qualityChecklist": {
+    "codeConventions": true,
+    "deadImports": true,
+    "duplicateLogic": true,
+    "hardcodedValues": true,
+    "testImpact": true,
+    "commitMessages": true,
+    "secretsExposed": false,
+    "codeSmells": true,
+    "noEmojis": true
+  },
+
+  "lastSession": "2026-09-16 13:43",
+  "lastUpdated": "2026-09-16"
+}
