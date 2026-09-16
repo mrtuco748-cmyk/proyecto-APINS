@@ -17,7 +17,6 @@ export default function Home() {
             alt="Isla Apipe — Rio Parana"
             className="w-full h-full object-cover"
             style={{ objectFit: "cover" }}
-            priority
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-tierra-900/60 via-tierra-900/30 to-tierra-900/80" />
