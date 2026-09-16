@@ -12,6 +12,11 @@ if (typeof window !== "undefined") {
 }
 
 const heroImages = [
+  "/images/playa-1.webp",
+  "/images/playa-2.webp",
+  "/images/playa-3.webp",
+  "/images/puerto-dia.png",
+  "/images/rio-botes-represa-noche.png",
   "/images/icono-APINS.png",
   "/images/icono-APINS.ico",
 ];
