@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd proyecto-APINS && npm run build",
-  "devCommand": "cd proyecto-APINS && npm run dev",
-  "installCommand": "cd proyecto-APINS && npm install",
-  "framework": "nextjs"
-}
