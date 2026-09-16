@@ -12,13 +12,13 @@ if (typeof window !== "undefined") {
 }
 
 const heroImages = [
+  "/images/icono-APINS.ico",
+  "/images/icono-APINS.png",
   "/images/playa-1.webp",
   "/images/playa-2.webp",
   "/images/playa-3.webp",
   "/images/puerto-dia.png",
   "/images/rio-botes-represa-noche.png",
-  "/images/icono-APINS.png",
-  "/images/icono-APINS.ico",
 ];
 
 export default function Home() {
@@ -103,7 +103,7 @@ export default function Home() {
         <div className="hero-content">
           <div ref={iconRef} className="hero-icon">
             <img
-              src="/images/icono-APINS.png"
+              src="/images/icono-APINS.ico"
               alt="Isla Apipe"
               className="w-24 h-24"
               style={{ filter: "drop-shadow(0 0 30px rgba(96,179,96,0.6))" }}
