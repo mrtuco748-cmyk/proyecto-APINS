@@ -1,7 +1,6 @@
 "use client";
 
 import HorizontalScroll from "@/components/HorizontalScroll";
-import SectionReveal from "@/components/SectionReveal";
 import ProgressBar from "@/components/ProgressBar";
 import Navigation from "@/components/Navigation";
 
@@ -52,18 +51,6 @@ export default function Home() {
       <div id="scroll-sections">
         <HorizontalScroll />
       </div>
-
-      {/* Scroll dots navigation */}
-      <nav className="dot-nav">
-        {[
-          { href: "#geografia", label: "Geografia" },
-          { href: "#historia", label: "Historia" },
-          { href: "#naturaleza", label: "Naturaleza" },
-          { href: "#cultura", label: "Cultura" },
-        ].map((item) => (
-          <a key={item.href} href={item.href} aria-label={item.label} />
-        ))}
-      </nav>
 
       <Navigation />
     </main>
