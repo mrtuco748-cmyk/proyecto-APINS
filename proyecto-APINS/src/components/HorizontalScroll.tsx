@@ -45,20 +45,20 @@ export default function HorizontalScroll() {
           className="w-screen h-screen flex-shrink-0 snap-start flex flex-col items-center justify-center px-8 relative"
           style={{ backgroundColor: section.color }}
         >
-          <div className="text-center max-w-md">
-            <div className="mb-6 text-white/30">{getShape(section.shape)}</div>
+          <div className="glass-card rounded-3xl p-8 max-w-md text-center">
+            <div className="mb-6 text-white/40">{getShape(section.shape)}</div>
             <h2 className="font-display text-4xl md:text-5xl text-white mb-4">
               {section.title}
             </h2>
-            <p className="text-white/50 text-sm tracking-wider uppercase mb-6">
+            <p className="text-white/50 text-sm tracking-wider uppercase mb-4">
               {section.subtitle}
             </p>
-            <p className="text-white/80 text-lg leading-relaxed">
+            <p className="text-white/80 text-lg leading-relaxed mb-6">
               {section.description}
             </p>
             <a
               href={`#${section.id}`}
-              className="inline-block mt-8 px-8 py-3 border-2 border-white/40 text-white rounded-full text-sm hover:bg-white/10 transition-all"
+              className="inline-block px-8 py-3 border-2 border-white/40 text-white rounded-full text-sm hover:bg-white/10 transition-all glass"
             >
               Explorar
             </a>
